@@ -10,28 +10,15 @@ try:
 except ImportError:
     from distutils.core import setup
 
-# different source folders
-version_info = sys.version_info[:2]
-source_folder = {
-    (2, 5): 'py25',
-    (2, 6): 'py25',
-    (2, 7): 'py27',
-    (3, 4): 'py34',
-    (3, 5): 'py34',
-    (3, 6): 'py34',
-    (3, 7): 'py34',
-    (3, 8): 'py34',
-    (3, 9): 'py34',
-    (3, 10): 'py34',
-    (3, 11): 'py34',
-    }.get(version_info, None)
-if not source_folder:
-    raise EnvironmentError("unsupported version of Python")
+# require Python 3.7 or newer
+if sys.version_info < (3, 7):
+    raise EnvironmentError("Python 3.7 or newer is required")
+
+source_folder = 'src'
 if not os.path.exists(source_folder):
-    raise EnvironmentError("broken distirbution, looking for " +
-        repr(source_folder) + " in " +
-        os.getcwd()
-        )
+    raise EnvironmentError(
+        "broken distribution, looking for " + repr(source_folder) + " in " + os.getcwd()
+    )
 
 # load in the project metadata
 init_py = open(os.path.join(source_folder, 'bacpypes', '__init__.py')).read()
@@ -75,16 +62,11 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.5',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
     ],
 

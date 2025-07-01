@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.11]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -31,40 +31,20 @@ jobs:
 #    - name: Lint with flake8
 #      run: |
 #        # stop the build if there are Python syntax errors or undefined names
-#        flake8 py34 --count --select=E9,F63,F7,F82 --show-source --statistics --ignore=E123,E221,E226,E302,E41,E701
+#        flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics --ignore=E123,E221,E226,E302,E41,E701
 #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-#        flake8 py34 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=E123,E221,E226,E302,E41,E701
+#        flake8 src --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=E123,E221,E226,E302,E41,E701
     - name: Test with pytest
       run: |
         pytest -v
 
-  legacy-build:
-    name: Legacy versions - Install and test
-    runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        python-version: [2.7, 3.4, 3.5, 3.6]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        pip install pytest
-        pip install setuptools --upgrade
-        python setup.py install
-    - name: Test with pytest
-      run: |
-        pytest -v
 
   windows-build:
     name: Windows - Install and test
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.11]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -86,7 +66,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.11]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
