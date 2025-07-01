@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """Minimal asyncio based TCP communications module."""
 
 import asyncio
