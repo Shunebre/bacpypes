@@ -28,7 +28,7 @@ source_folder = {
 if not source_folder:
     raise EnvironmentError("unsupported version of Python")
 if not os.path.exists(source_folder):
-    raise EnvironmentError("broken distirbution, looking for " +
+    raise EnvironmentError("broken distribution, looking for " +
         repr(source_folder) + " in " +
         os.getcwd()
         )
