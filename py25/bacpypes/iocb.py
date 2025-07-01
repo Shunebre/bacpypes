@@ -137,7 +137,7 @@ class IOCB(DebugContents):
         self.ioCallback.append((fn, args, kwargs))
 
         # already complete?
-        if self.ioComplete.isSet():
+        if self.ioComplete.is_set():
             self.trigger()
 
     def wait(self, *args, **kwargs):
@@ -403,7 +403,7 @@ class IOGroup(IOCB, DebugContents):
 
         # check all the members
         for iocb in self.ioMembers:
-            if not iocb.ioComplete.isSet():
+            if not iocb.ioComplete.is_set():
                 if _debug: IOGroup._debug("    - waiting for child: %r", iocb)
                 break
         else:
@@ -456,7 +456,7 @@ class IOQueue:
             raise RuntimeError("invalid state transition")
 
         # save that it might have been empty
-        wasempty = not self.notempty.isSet()
+        wasempty = not self.notempty.is_set()
 
         # add the request to the end of the list of iocb's at same priority
         priority = iocb.ioPriority
@@ -477,14 +477,14 @@ class IOQueue:
         if _debug: IOQueue._debug("get block=%r delay=%r", block, delay)
 
         # if the queue is empty and we do not block return None
-        if not block and not self.notempty.isSet():
+        if not block and not self.notempty.is_set():
             if _debug: IOQueue._debug("    - not blocking and empty")
             return None
 
         # wait for something to be in the queue
         if delay:
             self.notempty.wait(delay)
-            if not self.notempty.isSet():
+            if not self.notempty.is_set():
                 return None
         else:
             self.notempty.wait()
