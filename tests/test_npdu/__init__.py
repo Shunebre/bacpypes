@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """
 Test Network Layer Encoding and Decoding

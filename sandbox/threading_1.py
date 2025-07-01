@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """
 This application demonstrates doing something at a regular interval.
