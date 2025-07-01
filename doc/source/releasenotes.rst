@@ -16,8 +16,8 @@ Version 0.13.0
 --------------
 
 This is a big release, with no API changes since the 0.12.1 version, but the
-setup now detects which version of Python is running and switches between 
-source directories: *py25*, *py27*, and *py34*.
+setup now uses a common *src* directory for all supported Python versions
+(3.7 through 3.11).
 
 There is now a *test* directory, so in addition to the *build* and *install*
 options there is *test*, which uses

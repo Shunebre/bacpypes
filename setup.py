@@ -55,6 +55,7 @@ setup(
     },
     include_package_data=True,
     install_requires=requirements,
+    python_requires='>=3.7, <3.12',
     license="MIT",
     zip_safe=False,
     classifiers=[
