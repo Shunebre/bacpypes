@@ -5,12 +5,21 @@ Core
 """
 
 import sys
-import asyncore
 import signal
 import threading
 import time
 import traceback
 import warnings
+
+try:
+    import asyncio
+except ImportError:  # pragma: no cover
+    asyncio = None
+
+try:
+    import asyncore
+except ImportError:  # pragma: no cover
+    asyncore = None
 
 from .task import TaskManager
 from .debugging import bacpypes_debugging, ModuleLogger
@@ -150,8 +159,13 @@ def run(spin=SPIN, sigterm=stop, sigusr1=print_stack):
                 delta = min(delta, 0.001)
 #           if _debug: run._debug("    - delta: %r", delta)
 
-            # loop for socket activity
-            asyncore.loop(timeout=delta, count=1)
+            # loop for socket activity or sleep for the delta
+            if asyncore:
+                asyncore.loop(timeout=delta, count=1)
+            elif asyncio:
+                asyncio.get_event_loop().run_until_complete(asyncio.sleep(delta))
+            else:
+                time.sleep(delta)
 
             # check for deferred functions
             while deferredFns:
