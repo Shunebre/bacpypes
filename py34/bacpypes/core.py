@@ -160,10 +160,10 @@ def run(spin=SPIN, sigterm=stop, sigusr1=print_stack):
 #           if _debug: run._debug("    - delta: %r", delta)
 
             # loop for socket activity or sleep for the delta
-            if asyncore:
-                asyncore.loop(timeout=delta, count=1)
-            elif asyncio:
+            if asyncio:
                 asyncio.get_event_loop().run_until_complete(asyncio.sleep(delta))
+            elif asyncore:
+                asyncore.loop(timeout=delta, count=1)
             else:
                 time.sleep(delta)
 
