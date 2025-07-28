@@ -33,7 +33,7 @@ shift $((OPTIND-1))
 # this is where debugging output should go, the name of the
 # file matches the name of the script
 bugfile=$(basename $0)
-bugfile=${bugfile/.sh/.txt}
+bugfile=${bugfile/.sh/.debug}
 
 # debugging file can rotate, set the file size large to keep
 # it from rotating a lot
